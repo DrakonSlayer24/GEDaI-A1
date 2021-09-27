@@ -6,11 +6,13 @@ public class Movement : MonoBehaviour
 {
     Rigidbody rigidbody;
     public float speed = 10.0f;
+    public GameObject Lose;
     
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        Lose.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,6 +47,8 @@ public class Movement : MonoBehaviour
         if (rock)
         {
             Destroy(RockCol.gameObject);
+            Lose.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 

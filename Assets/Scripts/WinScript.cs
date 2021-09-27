@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBoost : MonoBehaviour
+public class WinScript : MonoBehaviour
 {
     Rigidbody rigidbody;
-    public float BoostDistance;
+    public GameObject Win;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        Win.SetActive(false);
     }
 
     // Update is called once per frame
@@ -19,13 +20,14 @@ public class PlayerBoost : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision PUCol)
+    void OnCollisionEnter(Collision WinCol)
     {
-        Boost PU = PUCol.gameObject.GetComponent<Boost>();
-        if (PU)
+        WinCup win = WinCol.gameObject.GetComponent<WinCup>();
+        if (win)
         {
-            Destroy(PUCol.gameObject);
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + BoostDistance);
+            Destroy(WinCol.gameObject);
+            Win.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 }
